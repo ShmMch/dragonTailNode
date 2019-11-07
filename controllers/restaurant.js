@@ -16,6 +16,20 @@ export default {
         }
     },
 
+    update: async (req, res) => {
+        try {
+            await restaurant.update(req.params.id, req.body);
+            return res.json('success').status(200);
+        }
+        catch (err) {
+            res.status(err.status || 500);
+            return res.json({
+                message: err.message,
+                error: err
+            });
+        }
+    },
+
     insertMany: async (req, res) => {
         try {
             const csvStinrg = req.file.buffer.toString();
